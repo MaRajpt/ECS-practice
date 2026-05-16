@@ -500,7 +500,11 @@ app.get("/cpu", async (req, res) => {
 });
 
 // ── HEALTH CHECK (for ALB) ────────────────────────────────────────────────────
-app.get("/health", (req, res) => res.json({ status: "ok" }));
+app.get("/health", (req, res) => {
+  let x = 0;
+  for (let i = 0; i < 5e6; i++) x += i;
+  res.json({ status: "ok" });
+});
 
 // ── START ─────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
